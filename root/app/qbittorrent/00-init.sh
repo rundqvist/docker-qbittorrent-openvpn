@@ -2,11 +2,13 @@
 
 mkdir -p /downloads/temp
 mkdir -p /downloads/finished
-mkdir -p /config/.config/qBittorrent/
+mkdir -p /config
 
-SP=$(cat /config/.config/qBittorrent/qBittorrent.conf | grep SavePath)
-if [ -z "$SP" ]
+mkdir -p /home/.config/
+ln -s /config /home/.config/qBittorrent
+
+if [ ! -e /config/qBittorrent.conf ]
 then
-  cp -f /app/qbittorrent/qBittorrent.conf /config/.config/qBittorrent/ > /dev/null
+  log -i "First run. Set default config."
+  cp -f /app/qbittorrent/qBittorrent.conf /config > /dev/null
 fi
-#cp /app/qbittorrent/qBittorrent.conf /config/.config/qBittorrent/ > /dev/null
